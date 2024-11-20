@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">VekF1App</string>
+    <string name="attention">Atenção</string>
+    <string name="back_button">Voltar</string>
+    <string name="delete">Excluir</string>
+    <string name="delete_question">Tem certeza?</string>
+    <string name="no_item_description">Sem almas.</string>
+    <string name="edit_item_title">Editar Alma</string>
+    <string name="item">Alma</string>
+    <string name="item_detail_title">Detalhes da Alma</string>
+    <string name="item_entry_title">Adicionar Alma</string>
+    <string name="item_name_req">Nome da Alma*</string>
+    <string name="item_price_req">Preço da Alma*</string>
+    <string name="no">Não</string>
+    <string name="price">Preço</string>
+    <string name="quantity_in_stock">Quantidade</string>
+    <string name="in_stock">%d em tortura</string>
+    <string name="quantity_req">Quantidade em Tortura*</string>
+    <string name="save_action">Salvar</string>
+    <string name="sell">Vender</string>
+    <string name="yes">Sim</string>
+    <string name="required_fields">*Campos Necessários</string>
+</resources>
