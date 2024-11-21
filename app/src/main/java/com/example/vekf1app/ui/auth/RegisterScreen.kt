@@ -43,6 +43,11 @@ fun RegisterScreen(onRegisterSuccess: () -> Unit, onNavigateToLogin: () -> Unit)
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = {
+                if (email.isEmpty() || password.isEmpty()) {
+                    errorMessage = "Preencha todos os campos!"
+                    return@Button
+                }
+
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {

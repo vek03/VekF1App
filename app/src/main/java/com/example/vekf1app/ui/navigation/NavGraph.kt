@@ -7,18 +7,23 @@ import androidx.navigation.compose.composable
 import com.google.firebase.auth.FirebaseAuth
 import com.example.vekf1app.ui.auth.LoginScreen
 import com.example.vekf1app.ui.auth.RegisterScreen
-import com.example.vekf1app.ui.auth.WelcomeScreen
+import com.example.vekf1app.ui.auth.DashboardScreen
+import com.example.vekf1app.ui.pilots.CreatePilotScreen
+import com.example.vekf1app.ui.pilots.EditPilotScreen
+import com.example.vekf1app.ui.pilots.ListGrandPrixsScreen
+import com.example.vekf1app.ui.pilots.ListPilotsScreen
+import com.example.vekf1app.ui.pilots.ViewGrandPrixScreen
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
     val auth = FirebaseAuth.getInstance()
     val currentUser = auth.currentUser
 
-    NavHost(navController, startDestination = if (currentUser != null) "welcome" else "login") {
+    NavHost(navController, startDestination = if (currentUser != null) "dashboard" else "login") {
         composable("login") {
             LoginScreen(
                 onLoginSuccess = {
-                    navController.navigate("welcome") {
+                    navController.navigate("dashboard") {
                         popUpTo("login") { inclusive = true }
                     }
                 },
@@ -30,7 +35,7 @@ fun AppNavigation(navController: NavHostController) {
         composable("register") {
             RegisterScreen(
                 onRegisterSuccess = {
-                    navController.navigate("welcome") {
+                    navController.navigate("dashboard") {
                         popUpTo("register") { inclusive = true }
                     }
                 },
@@ -39,12 +44,75 @@ fun AppNavigation(navController: NavHostController) {
                 }
             )
         }
-        composable("welcome") {
-            WelcomeScreen(onLogout = {
-                navController.navigate("login") {
-                    popUpTo("welcome") { inclusive = true }
+        composable("dashboard") {
+            DashboardScreen(
+                onLogout = {
+                    navController.navigate("login") {
+                        popUpTo("dashboard") { inclusive = true }
+                    }
+                },
+                onNavigateToListPilots = {
+                    navController.navigate("listPilots")
+                },
+                onNavigateToListGrandPrixs = {
+                    navController.navigate("listGrandPrixs")
                 }
-            })
+            )
+        }
+        composable("listPilots") {
+            ListPilotsScreen(
+                onNavigateToDashboard = {
+                    navController.navigate("dashboard") {
+                        popUpTo("dashboard") { inclusive = true }
+                    }
+                },
+                onNavigateToCreatePilot = {
+                    navController.navigate("createPilot") {
+                        popUpTo("createPilot") { inclusive = true }
+                    }
+                }
+            )
+        }
+        composable("createPilot") {
+            CreatePilotScreen(
+                onNavigateToListPilots = {
+                    navController.navigate("listPilots") {
+                        popUpTo("listPilots") { inclusive = true }
+                    }
+                }
+            )
+        }
+        composable("editPilot") {
+            EditPilotScreen(
+                onNavigateToListPilots = {
+                    navController.navigate("listPilots") {
+                        popUpTo("listPilots") { inclusive = true }
+                    }
+                }
+            )
+        }
+        composable("listGrandPrixs") {
+            ListGrandPrixsScreen(
+                onNavigateToDashboard = {
+                    navController.navigate("dashboard") {
+                        popUpTo("dashboard") { inclusive = true }
+                    }
+                },
+                onNavigateToViewGrandPrix = {
+                    navController.navigate("viewGrandPrix") {
+                        popUpTo("viewGrandPrix") { inclusive = true }
+                    }
+                }
+            )
+        }
+        composable("viewGrandPrix") {
+            ViewGrandPrixScreen(
+                onNavigateToListGrandPrixs = {
+                    navController.navigate("listGrandPrixs") {
+                        popUpTo("listGrandPrixs") { inclusive = true }
+                    }
+                }
+            )
         }
     }
 }
