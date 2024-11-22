@@ -11,9 +11,6 @@ import com.example.vekf1app.ui.auth.DashboardScreen
 import com.example.vekf1app.ui.pilots.CreatePilotScreen
 import com.example.vekf1app.ui.pilots.EditPilotScreen
 import com.example.vekf1app.ui.pilots.ListPilotsScreen
-import com.example.vekf1app.ui.teams.CreateTeamScreen
-import com.example.vekf1app.ui.teams.EditTeamScreen
-import com.example.vekf1app.ui.teams.ListTeamsScreen
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
@@ -54,9 +51,6 @@ fun AppNavigation(navController: NavHostController) {
                 },
                 onNavigateToListPilots = {
                     navController.navigate("listPilots")
-                },
-                onNavigateToListTeams = {
-                    navController.navigate("listTeams")
                 }
             )
         }
@@ -71,6 +65,9 @@ fun AppNavigation(navController: NavHostController) {
                     navController.navigate("createPilot") {
                         popUpTo("createPilot") { inclusive = true }
                     }
+                },
+                onNavigateToPilotUpdate = { pilotId ->
+                    navController.navigate("editPilot/$pilotId")
                 }
             )
         }
@@ -83,41 +80,9 @@ fun AppNavigation(navController: NavHostController) {
                 }
             )
         }
-        composable("editPilot") {
+        composable("editPilot/{pilotId}") {
             EditPilotScreen(
                 onNavigateToListPilots = {
-                    navController.navigate("listPilots") {
-                        popUpTo("listPilots") { inclusive = true }
-                    }
-                }
-            )
-        }
-        composable("listTeams") {
-            ListTeamsScreen(
-                onNavigateToDashboard = {
-                    navController.navigate("dashboard") {
-                        popUpTo("dashboard") { inclusive = true }
-                    }
-                },
-                onNavigateToCreateTeam = {
-                    navController.navigate("viewTeam") {
-                        popUpTo("viewTeam") { inclusive = true }
-                    }
-                }
-            )
-        }
-        composable("createTeam") {
-            CreateTeamScreen(
-                onNavigateToListTeams = {
-                    navController.navigate("listPilots") {
-                        popUpTo("listPilots") { inclusive = true }
-                    }
-                }
-            )
-        }
-        composable("editTeam") {
-            EditTeamScreen(
-                onNavigateToListTeams = {
                     navController.navigate("listPilots") {
                         popUpTo("listPilots") { inclusive = true }
                     }

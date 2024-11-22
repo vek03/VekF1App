@@ -20,7 +20,7 @@ fun EditPilotScreen(onNavigateToListPilots: () -> Unit) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Listagem de Itens")
+            Text("Exibir Item")
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = {
                 //
