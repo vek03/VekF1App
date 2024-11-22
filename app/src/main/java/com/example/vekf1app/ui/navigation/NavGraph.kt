@@ -10,9 +10,10 @@ import com.example.vekf1app.ui.auth.RegisterScreen
 import com.example.vekf1app.ui.auth.DashboardScreen
 import com.example.vekf1app.ui.pilots.CreatePilotScreen
 import com.example.vekf1app.ui.pilots.EditPilotScreen
-import com.example.vekf1app.ui.pilots.ListGrandPrixsScreen
 import com.example.vekf1app.ui.pilots.ListPilotsScreen
-import com.example.vekf1app.ui.pilots.ViewGrandPrixScreen
+import com.example.vekf1app.ui.teams.CreateTeamScreen
+import com.example.vekf1app.ui.teams.EditTeamScreen
+import com.example.vekf1app.ui.teams.ListTeamsScreen
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
@@ -54,8 +55,8 @@ fun AppNavigation(navController: NavHostController) {
                 onNavigateToListPilots = {
                     navController.navigate("listPilots")
                 },
-                onNavigateToListGrandPrixs = {
-                    navController.navigate("listGrandPrixs")
+                onNavigateToListTeams = {
+                    navController.navigate("listTeams")
                 }
             )
         }
@@ -91,25 +92,34 @@ fun AppNavigation(navController: NavHostController) {
                 }
             )
         }
-        composable("listGrandPrixs") {
-            ListGrandPrixsScreen(
+        composable("listTeams") {
+            ListTeamsScreen(
                 onNavigateToDashboard = {
                     navController.navigate("dashboard") {
                         popUpTo("dashboard") { inclusive = true }
                     }
                 },
-                onNavigateToViewGrandPrix = {
-                    navController.navigate("viewGrandPrix") {
-                        popUpTo("viewGrandPrix") { inclusive = true }
+                onNavigateToCreateTeam = {
+                    navController.navigate("viewTeam") {
+                        popUpTo("viewTeam") { inclusive = true }
                     }
                 }
             )
         }
-        composable("viewGrandPrix") {
-            ViewGrandPrixScreen(
-                onNavigateToListGrandPrixs = {
-                    navController.navigate("listGrandPrixs") {
-                        popUpTo("listGrandPrixs") { inclusive = true }
+        composable("createTeam") {
+            CreateTeamScreen(
+                onNavigateToListTeams = {
+                    navController.navigate("listPilots") {
+                        popUpTo("listPilots") { inclusive = true }
+                    }
+                }
+            )
+        }
+        composable("editTeam") {
+            EditTeamScreen(
+                onNavigateToListTeams = {
+                    navController.navigate("listPilots") {
+                        popUpTo("listPilots") { inclusive = true }
                     }
                 }
             )

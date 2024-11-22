@@ -1,4 +1,4 @@
-package com.example.vekf1app.ui.pilots
+package com.example.vekf1app.ui.teams
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
-fun ListGrandPrixsScreen(onNavigateToDashboard: () -> Unit, onNavigateToViewGrandPrix: () -> Unit) {
+fun ListTeamsScreen(onNavigateToDashboard: () -> Unit, onNavigateToCreateTeam: () -> Unit) {
     val user = FirebaseAuth.getInstance().currentUser
     user?.let {
         Column(
