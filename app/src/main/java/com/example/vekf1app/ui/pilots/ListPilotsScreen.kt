@@ -165,25 +165,6 @@ private fun InventoryItem(
     pilot: Pilot,
     modifier: Modifier = Modifier
 ) {
-//    val team = Team(
-//        id = "1",
-//        nome = "Ferrari",
-//        carro = "Ferrari 488",
-//        imagem = "ferrari.png",
-//        corPrimaria = "#FF0000",
-//        corSecundaria = "#00FF00"
-//    )
-
-    var team by remember { mutableStateOf<Team?>(null) }
-
-    LaunchedEffect(Unit) {
-        team = TeamRepository(db).getTeam(pilot.getEquipeId())
-    }
-
-    if (team == null) {
-        return
-    }
-
     Card(
         modifier = modifier,
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
@@ -207,21 +188,17 @@ private fun InventoryItem(
                     color = MaterialTheme.colorScheme.onSecondaryContainer
                 )
                 Spacer(Modifier.weight(1f))
-                team?.let {
-                    Text(
-                        text = it.getNome(),
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer
-                    )
-                }
-            }
-            team?.let {
                 Text(
-                    text = it.getCarro(),
+                    text = pilot.getIdade(),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSecondaryContainer
                 )
             }
+            Text(
+                text = pilot.getIdade() + " anos",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSecondaryContainer
+            )
         }
     }
 }

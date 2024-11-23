@@ -1,5 +1,6 @@
 package com.example.vekf1app.repository
 
+import android.util.Log
 import com.example.vekf1app.models.Pilot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -58,17 +59,17 @@ class PilotRepository(private val db: FirebaseFirestore) {
         }
     }
 
-    suspend fun updatePilot(id: String, pilot: Pilot): Boolean {
+    suspend fun updatePilot(id: String, pilot: Pilot?): Boolean {
         return try {
             val documentRef = pilotsCollection.document(id)
             documentRef.update(
-                "nome", pilot.getNome(),
-                "equipeId", pilot.getEquipeId(),
-                "idade", pilot.getIdade(),
-                "pais", pilot.getPais()
+                "nome", pilot?.getNome(),
+                "idade", pilot?.getIdade(),
+                "pais", pilot?.getPais()
             ).await()
             true
         } catch (e: Exception) {
+            Log.e("PilotRepository", "Erro ao atualizar piloto: ${e.message}")
             false
         }
     }

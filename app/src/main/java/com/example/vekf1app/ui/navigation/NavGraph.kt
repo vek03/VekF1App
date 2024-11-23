@@ -86,7 +86,8 @@ fun AppNavigation(navController: NavHostController) {
                     navController.navigate("listPilots") {
                         popUpTo("listPilots") { inclusive = true }
                     }
-                }
+                },
+                pilotId = it.arguments?.getString("pilotId") ?: ""
             )
         }
     }

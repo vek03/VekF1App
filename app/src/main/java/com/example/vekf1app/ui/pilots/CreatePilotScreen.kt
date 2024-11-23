@@ -123,14 +123,16 @@ fun PilotInputForm(
             modifier = Modifier.fillMaxWidth()
         )
 
-        TeamDropdown(
-            options = teams,
-            selectedItem = selectedTeam,
-            onItemSelected = { team ->
-                selectedTeam = team
-                equipeId = team.getId().toString()
-            }
-        )
+        if(pilot === null){
+            TeamDropdown(
+                options = teams,
+                selectedItem = selectedTeam,
+                onItemSelected = { team ->
+                    selectedTeam = team
+                    equipeId = team.getId().toString()
+                }
+            )
+        }
 
         CustomTextField(
             value = idade,

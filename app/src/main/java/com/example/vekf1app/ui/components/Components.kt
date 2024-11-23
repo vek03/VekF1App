@@ -1,8 +1,11 @@
 package com.example.vekf1app.ui.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.TextSelectionColors
@@ -31,6 +34,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.vekf1app.models.Team
@@ -150,16 +154,19 @@ fun TeamDropdown(
     val selectedName = selectedItem?.getNome() ?: "Selecione um time"
 
     Column {
-        // Exibe o item selecionado
-        Text(
-            text = selectedName,
+        CustomTextField(
+            value = selectedName,
+            onValueChange = {  },
+            readOnly = true,
+            label = "Selecione uma Equipe",
             modifier = Modifier
+                .fillMaxWidth()
                 .clickable { expanded = !expanded }
-                .padding(16.dp)
+                .padding(0.dp)
         )
 
-        // Exibe o menu suspenso (dropdown)
         DropdownMenu(
+            modifier = Modifier.fillMaxWidth().padding(10.dp),
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
