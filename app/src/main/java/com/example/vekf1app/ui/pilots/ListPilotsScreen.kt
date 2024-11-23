@@ -16,11 +16,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -29,8 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.vekf1app.models.Pilot
 import com.example.vekf1app.models.Team
-import com.example.vekf1app.repository.PilotRepository
-import com.example.vekf1app.repository.TeamRepository
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vekf1app.ui.components.TopAppBar
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -43,20 +39,17 @@ fun ListPilotsScreen(
     onNavigateToDashboard: () -> Unit,
     onNavigateToCreatePilot: () -> Unit,
     onNavigateToPilotUpdate: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: PilotsViewModel = viewModel()
 ) {
     val user = FirebaseAuth.getInstance().currentUser
     val db = Firebase.firestore
 
     user?.let {
-        val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-        var pilots by remember { mutableStateOf<List<Pilot>>(emptyList()) }
-        var teams by remember { mutableStateOf<List<Team>>(emptyList()) }
+        val pilots by viewModel.pilots.observeAsState(emptyList())
+        val teams by viewModel.teams.observeAsState(emptyList())
 
-        LaunchedEffect(Unit) {
-            pilots = PilotRepository(db).getPilots();
-            teams = TeamRepository(db).getTeams()
-        }
+        val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
         Scaffold(
             modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -96,6 +89,7 @@ fun ListPilotsScreen(
         }
     }
 }
+
 
 
 @Composable

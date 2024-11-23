@@ -46,6 +46,7 @@ class PilotRepository(private val db: FirebaseFirestore) {
             val document = pilotsCollection.document(id).get().await() // Recupera o piloto pelo ID
             if (document.exists()) {
                 Pilot(
+                    id = document.id,
                     nome = document.getString("nome") ?: "",
                     equipeId = document.getString("equipeKey") ?: "",
                     idade = document.getString("idade") ?: "",
