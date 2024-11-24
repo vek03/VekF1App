@@ -12,7 +12,6 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 val glitterGold = Color(0xFFFFD700)
-val redF1 = Color(0xFF800303)
 val darkTheme = Color(0xFF49473F)
 val darkLightTheme = Color(0xFF55544C)
 val darkBlack = Color(0xFF000000)

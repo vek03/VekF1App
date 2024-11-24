@@ -1,4 +1,4 @@
-package com.example.vekf1app.ui.pilots
+package com.example.vekf1app.viewModels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -22,7 +22,7 @@ class EditPilotViewModel : ViewModel() {
                 val fetchedPilot = PilotRepository(db).getPilot(pilotId)
                 _pilot.value = fetchedPilot
             } catch (e: Exception) {
-                // Trate o erro aqui se necessário
+                Log.e("EditPilotViewModel", "Erro ao carregar piloto", e)
             }
         }
     }

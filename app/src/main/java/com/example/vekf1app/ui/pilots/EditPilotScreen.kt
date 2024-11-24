@@ -37,6 +37,7 @@ import com.example.vekf1app.ui.components.CustomTextField
 import com.example.vekf1app.ui.components.DialogButton
 import com.example.vekf1app.ui.components.TopAppBar
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.vekf1app.viewModels.EditPilotViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,14 +45,12 @@ fun EditPilotScreen(
     onNavigateToListPilots: () -> Unit,
     pilotId: String,
     modifier: Modifier = Modifier,
-    viewModel: EditPilotViewModel = viewModel() // Acesso ao ViewModel
+    viewModel: EditPilotViewModel = viewModel()
 ) {
-    // Acompanha as mudanças no estado do piloto
     val pilot by viewModel.pilot.observeAsState(null)
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    // Carregar o piloto usando o ViewModel
     LaunchedEffect(pilotId) {
         viewModel.loadPilot(pilotId)
     }
@@ -143,7 +142,6 @@ fun PilotEditInputForm(
                     return@Button
                 }
 
-                // Atualiza o piloto e navega de volta para a lista
                 val updatedPilot = pilot?.apply {
                     setNome(nome)
                     setIdade(idade)

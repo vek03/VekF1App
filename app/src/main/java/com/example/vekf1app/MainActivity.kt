@@ -12,7 +12,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             VekF1AppTheme {
-                // Use a NavController to navigate between screens
                 val navController = rememberNavController()
                 AppNavigation(navController)
             }
