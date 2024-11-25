@@ -159,7 +159,7 @@ fun LoginBody(
             Spacer(modifier = Modifier.height(20.dp))
 
             if (errorMessage.isNotEmpty()) {
-                Text(errorMessage, color = Color.Red)
+                Text(errorMessage, color = MaterialTheme.colorScheme.error)
                 Spacer(modifier = Modifier.height(10.dp))
             }
 

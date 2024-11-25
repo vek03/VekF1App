@@ -27,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -152,7 +151,7 @@ fun RegisterBody(onRegisterSuccess: () -> Unit, onNavigateToLogin: () -> Unit, c
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                onRegisterSuccess()  // Navega para a tela inicial
+                                onRegisterSuccess()
                             } else {
                                 Log.i(TAG, "createUserWithEmail:failure - Email: $email, Password: $password", task.exception)
 
@@ -172,7 +171,7 @@ fun RegisterBody(onRegisterSuccess: () -> Unit, onNavigateToLogin: () -> Unit, c
             Spacer(modifier = Modifier.height(20.dp))
 
             if (errorMessage.isNotEmpty()) {
-                Text(errorMessage, color = Color.Red, textAlign = TextAlign.Center)
+                Text(errorMessage, color = MaterialTheme.colorScheme.error, textAlign = TextAlign.Center)
                 Spacer(modifier = Modifier.height(10.dp))
             }
 
