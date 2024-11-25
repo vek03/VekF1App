@@ -3,10 +3,10 @@ O projeto está em Desenvolvimento. Contendo:
 
 - [x] Estrutura Back
 - [x] Estrutura Front
-- [ ] Front-End
+- [x] Front-End
 - [x] Login
 - [x] Cadastro
-- [ ] 3 CRUDs
+- [x] 3 CRUDs
 
 > Projeto CRUD com Firebase FireStore em Node.js e Handlebars com Autenticação do Firebase 
 > Versão Web que pode ser integrada à Mobile
