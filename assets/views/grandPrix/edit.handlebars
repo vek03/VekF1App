@@ -1,0 +1,343 @@
+<style>
+    .container {
+        background-color: #1e1e1e;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #FFD700;
+    }
+
+    label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+        color: #FFD700;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #FFD700;
+        border-radius: 5px;
+        background-color: #2c2c2c;
+        color: #FFD700;
+        font-size: 14px;
+    }
+
+    input::placeholder {
+        color: #999;
+    }
+
+    .button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #FFD700;
+        color: #121212;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px;
+    }
+    .button.excluir{
+        background-color: rgb(163, 12, 12);
+    }
+    .button.excluir:hover{
+        background-color: #d30606;
+    }
+    .button.salvar:hover {
+        background-color: #e6b800;
+    }
+
+    .podio-list-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Default: 3 columns */
+        gap: 20px;
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    .podio-item {
+        margin-bottom: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        cursor: grab;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .podio-item.dragging {
+        opacity: 0.5;
+        background: #e9ecef;
+    }
+
+    .position-box {
+        width: 120px;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: transparent;
+        clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        color: white;
+        z-index: 1;
+    }
+
+    .logo-box {
+        width: 70px;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: transparent;
+        clip-path: polygon(20% 0, 100000% 100%, 0 100%, 0 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        color: white;
+        z-index: 1;
+    }
+
+    .gold {
+        background-color: gold;
+    }
+
+    .silver {
+        background-color: silver;
+        color: black;
+    }
+
+    .bronze {
+        background-color: #cd7f32;
+    }
+
+    .gray {
+        background-color: gray;
+    }
+
+    .info-box {
+        flex-grow: 1;
+        padding: 10px 20px;
+        margin-left: 100px;
+        border-radius: 5px;
+        color: white;
+        text-align: left;
+        margin-left: -50px;
+        padding-left: 180px;
+    }
+
+    @media (max-width: 1024px) {
+        .podio-list-container {
+            grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+        }
+
+        .info-box {
+            padding-left: 150px;
+        }
+
+        .logo-box {
+            width: 80px;
+        }
+
+        .position-box {
+            width: 80px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .podio-list-container {
+            grid-template-columns: 1fr; /* 1 column on small screens */
+        }
+
+        .info-box {
+            padding-left: 130px;
+        }
+
+        .logo-box {
+            width: 60px;
+        }
+
+        .position-box {
+            width: 60px;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="col-md-12">
+        <h1>{{{ title }}}</h1>
+    </div>
+
+    <div class="col-md-12">
+        <form class="" action="/grandPrix/{{grandPrix.id}}/update" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite o nome" required value="{{grandPrix.nome}}">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="pais">País</label>
+                    <input type="text" id="pais" name="pais" placeholder="Digite o país" required value="{{grandPrix.pais}}">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" id="cidade" name="cidade" placeholder="Digite a cidade" required value="{{grandPrix.cidade}}">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="pista">Pista</label>
+                    <input type="text" id="pista" name="pista" placeholder="Digite a pista" required value="{{grandPrix.pista}}">
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="data_ini">Data Início</label>
+                    <input type="date" id="data_inicio" name="data_inicio" required value="{{grandPrix.data_inicio}}">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="data_fim">Data Fim</label>
+                    <input type="date" id="data_fim" name="data_fim" required value="{{grandPrix.data_fim}}">
+                </div>
+                
+                <div class="col-md-12">
+                    <h1>Pódio</h1>
+                    <div class=" pb-20 podio-list-container" id="podioList"></div>
+                </div>
+
+                <input type="hidden" name="podio" id="podio" value="{{grandPrix.podio}}">
+                
+                <div class="col-md-12 pt-10">
+                    <button class="button" style="margin-top: 50px;" class="editar" type="submit">Salvar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/public/js/podio.js"></script>
+<script>
+    const podio = JSON.parse(document.getElementById("podio").value);
+
+    const podioList = document.getElementById("podioList");
+    let draggedElement = null;
+    let isTouch = false;
+
+    function renderPodio() {
+        document.getElementById("podio").value = JSON.stringify(podio);
+        podioList.innerHTML = "";
+        podio.forEach((podio, index) => {
+            const div = document.createElement("div");
+            div.classList.add("podio-item");
+            div.draggable = true;
+
+            const positionClass = index === 0 ? "gold" : index === 1 ? "silver" : index === 2 ? "bronze" : "gray";
+
+            div.innerHTML = `
+                    <div class="position-box ${positionClass}">${index + 1}</div>
+                    <div class="info-box" style="background-color: ${podio.equipe.corPrimaria}; color: ${podio.equipe.corSecundaria};">
+                        <strong>${podio.nome}</strong><br>
+                        <span class="equipe-name">${podio.equipe.nome}</span>
+                    </div>
+                    <div class="logo-box">
+                        <img src="/public/img/marcas/${podio.equipe.imagem}" alt="${podio.equipe.nome}" style="max-height: 50px; max-width: 60px;">
+                    </div>
+                `;
+
+            div.addEventListener("dragstart", (e) => {
+                isTouch = false;
+                draggedElement = div;
+                div.classList.add("dragging");
+            });
+
+            div.addEventListener("dragend", () => {
+                div.classList.remove("dragging");
+                draggedElement = null;
+                updatePositions();
+            });
+
+            div.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                if (isTouch) return;
+                const afterElement = getDragAfterElement(podioList, e.clientY);
+                if (afterElement == null) {
+                    podioList.appendChild(draggedElement);
+                } else {
+                    podioList.insertBefore(draggedElement, afterElement);
+                }
+            });
+
+            div.addEventListener("touchstart", (e) => {
+                isTouch = true;
+                draggedElement = div;
+                div.classList.add("dragging");
+                e.preventDefault();
+            });
+
+            div.addEventListener("touchend", () => {
+                div.classList.remove("dragging");
+                draggedElement = null;
+                updatePositions();
+            });
+
+            div.addEventListener("touchmove", (e) => {
+                if (!isTouch) return;
+                const touch = e.touches[0];
+                const afterElement = getDragAfterElement(podioList, touch.clientY);
+                if (afterElement == null) {
+                    podioList.appendChild(draggedElement);
+                } else {
+                    podioList.insertBefore(draggedElement, afterElement);
+                }
+                e.preventDefault();
+            });
+
+            podioList.appendChild(div);
+        });
+    }
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll(".podio-item:not(.dragging)")];
+        return draggableElements.reduce(
+            (closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            },
+            { offset: Number.NEGATIVE_INFINITY }
+        ).element;
+    }
+
+    function updatePositions() {
+        const newOrder = [...podioList.querySelectorAll(".podio-item")].map((item) => {
+            const name = item.querySelector(".info-box strong").textContent.trim();
+            return podio.find(podio => podio.nome === name);
+        });
+        podio.splice(0, podio.length, ...newOrder);
+        renderPodio();
+    }
+
+    podioList.addEventListener("drop", () => {
+        updatePositions();
+    });
+
+    renderPodio();
+</script>

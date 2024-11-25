@@ -1,0 +1,106 @@
+<style>
+    .container {
+        background-color: #1e1e1e;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #FFD700;
+    }
+
+    label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+        color: #FFD700;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #FFD700;
+        border-radius: 5px;
+        background-color: #2c2c2c;
+        color: #FFD700;
+        font-size: 14px;
+    }
+
+    input::placeholder {
+        color: #999;
+    }
+
+    .button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #FFD700;
+        color: #121212;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px;
+    }
+    .button.excluir{
+        background-color: rgb(163, 12, 12);
+    }
+    .button.excluir:hover{
+        background-color: #d30606;
+    }
+    .button.salvar:hover {
+        background-color: #e6b800;
+    }
+
+</style>
+
+<div class="container">
+    <div class="col-md-12">
+        <h1>{{{ title }}}</h1>
+    </div>
+
+    <div class="col-md-12">
+        <form class="" action="/teams/{{team.id}}/update" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite o nome" required value="{{team.nome}}">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="imagem">Imagem</label>
+                    <select id="imagem" name="imagem">
+                        <option value="{{team.imagem}}" selected>{{team.imagem}}</option>
+                        <option value="alfaRomeo.svg">Alfa Romeo</option>
+                        <option value="alphatauri.svg">Alpha Tauri</option>
+                        <option value="alpine.svg">Alpine</option>
+                        <option value="astonMartin.svg">Aston Martin</option>
+                        <option value="ferrari.svg">Ferrari</option>
+                        <option value="haas.svg">Haas</option>
+                        <option value="mclaren.svg">Mclaren</option>
+                        <option value="mercedes.svg">Mercedes</option>
+                        <option value="redBull.svg">Red Bull</option>
+                        <option value="williams.svg">Williams</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="corPrimaria">Cor Primaria</label>
+                    <input type="color" id="corPrimaria" name="corPrimaria" placeholder="Digite a Primaria" required value="{{ team.corPrimaria }}">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="corSecundaria">Cor Secundaria</label>
+                    <input type="color" id="corSecundaria" name="corSecundaria" placeholder="Digite a cor Secundaria" required value="{{ team.corSecundaria }}">
+                </div>
+                    
+                <div class="col-md-12">
+                    <button class="button" style="margin-top: 20px;" type="submit">Salvar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

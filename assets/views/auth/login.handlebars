@@ -1,0 +1,29 @@
+<head>
+    <link rel="stylesheet" href="/public/css/login.css">
+</head>
+
+<form class="form" action="/login" method="POST">
+    <div class="main-login">
+        <div class="left-login">
+            <h1>Faça login para </br> gerenciar os GPs de F1!</h1>
+            <img src="/public/img/logo/icon.png" class="left-login-image" alt="ocean">
+        </div>
+        <div class="right-login">
+            <div class="card-login">
+                <h1>Login</h1>
+                <div class="cadastro-text">
+                    <span class="registro-texto">Ainda não é cadastrado? </span><a class="registro-url" href="/register">Cadastre-se</a>
+                </div>
+                <div class="textfield">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="example@example.com">
+                </div>
+                <div class="textfield">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" minlength="6" maxlength="14" required placeholder="Senha">
+                </div>
+                <button type="submit" class="btn-login">Login</button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,136 @@
+<style>
+    /* Container geral */
+    .container {
+        background-color: #1e1e1e;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        color: #fff;
+    }
+
+    /* Estilo dos cards */
+    .race-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #333; /* Cor de fundo do card */
+        color: #fff; /* Cor do texto */
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        flex-wrap: wrap;
+    }
+
+    .race-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Nome da equipe à esquerda */
+    .race-card .info-box {
+        flex-grow: 1;
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-right: 20px;
+    }
+
+    /* Imagem à direita */
+    .race-card img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+
+    /* Botões de editar e excluir (quadrados arredondados e ícones pequenos) */
+    .race-card .button-group {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .button-group button {
+        width: 48%; /* 50% da largura do card, com um pequeno espaço */
+        height: 50px; /* Altura fixa para manter o formato quadrado arredondado */
+        padding: 10px;
+        border-radius: 10px; /* Botão arredondado */
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 0; /* Oculta o texto */
+        transition: background-color 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    /* Botão Editar */
+    .button-group button.edit {
+        background-color: #FFD700; /* Cor de fundo do botão editar */
+    }
+
+    .button-group button.edit:hover {
+        background-color: #e6be00;
+    }
+
+    /* Botão Excluir */
+    .button-group button.delete {
+        background-color: rgb(163, 12, 12); /* Cor de fundo do botão excluir */
+    }
+
+    .button-group button.delete:hover {
+        background-color: #d30606;
+    }
+
+    /* Tamanho dos ícones dentro dos botões */
+    .button-group button svg {
+        width: 24px;
+        height: 24px;
+        fill: white; /* Cor do ícone */
+    }
+
+    /* Responsividade para telas pequenas */
+    @media (max-width: 768px) {
+        .race-card {
+            flex-direction: column; /* Empilha os elementos verticalmente */
+            align-items: center;
+        }
+
+        .race-card .info-box {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .race-card img {
+            margin-top: 10px;
+        }
+
+        .button-group {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="container py-5">
+    <div class="tab-content mt-4">
+        <h3>{{ title }}</h3>
+        <p>Aqui você pode visualizar os detalhes dos Pilotos.</p>
+
+        <!-- Cards das Equipes -->
+        {{#each pilots}}
+            <div class="race-card">
+                <!-- Nome da Equipe -->
+                <div class="info-box">
+                    <h4>{{nome}}</h4>
+                    <h6>{{equipe.nome}}</h6>
+                    <h6>{{idade}} anos</p>
+                    <h6>{{pais}}</h6>
+                </div>
+
+                <!-- Imagem da Equipe -->
+                <img src="/public/img/marcas/{{equipe.imagem}}" alt="Logo da equipe">
+            </div>
+        {{/each}}
+    </div>
+</div>

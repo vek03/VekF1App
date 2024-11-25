@@ -1,0 +1,46 @@
+<head>
+    <link rel="stylesheet" href="/public/css/adicionar.css">
+</head>
+
+<style>
+    .card{
+        background-color: #1e1e1e;
+        color: #fff;
+        border-radius: 0%;
+    }
+
+    .btn-black{
+        color:#fff;
+        background-color: #900000;
+    }
+
+    .btn-black:hover{
+        color:#fff;
+        background-color: #a51313;
+    }
+</style> 
+
+<div class="card">
+    <form class="editar" action="/profile/alterPassword" method="POST">
+    <h1 class="top-text">Alterar Senha (Login)</h1>
+        
+        <div class="mb-3 text-start">
+            <label class="form-label">Email:</label>
+            <input type="email" name="email" readonly value="{{ user.email }}" class="form-control" required id="email">
+        </div>
+
+        <div class="mb-3 text-start">
+            <label class="form-label">Nova Senha:</label>
+            <input type="password" name="password" minlength="6" maxlength="14" class="form-control" required id="newPassword">
+        </div>
+
+        <div class="mb-3 text-start">
+            <label class="form-label">Confirmar Senha:</label>
+            <input type="password" name="password_confirmation" minlength="6" maxlength="14" class="form-control" required id="newPassword">
+        </div>
+
+        <div class="mb-3 text-start">
+            <button type="submit" class="btn btn-black">Alterar</button>
+        </div>
+    </form>
+</div>

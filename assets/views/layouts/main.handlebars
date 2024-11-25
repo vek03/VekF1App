@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="icon" href="/public/img/logo/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>VekF1 - {{{ title }}}</title>
+</head>
+<body style="background-color: #900000;">
+    <div class="container">
+        <div class="row align-items-start text-center">
+            <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+                <div class="container-fluid" style="margin-top: 10px;">
+                    <a class="navbar-brand" href="/">
+                        <img src="/public/img/logo/icon.png" alt="Logo" width="40" height="40" style="padding-left: 10px;">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav ms-auto"> <!-- ms-auto alinha à direita -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="/grandPrix">Grand Prix</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/pilots">Pilotos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/teams">Equipes</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Perfil
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/profile">Editar Perfil</a></li>
+                                    <li><a class="dropdown-item" href="#logout" onclick="logout();">Sair</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+
+        <header class="row align-items-center bg-dark text-bg-dark py-3">
+            <h5 class="ms-3 text-light" style="font-size: 1.5rem;">{{{ title }}}</h5>
+        </header>
+
+
+        <section class="align-items-start bg-white text-bg-white">
+            {{{ body }}}
+        </section>
+    </div>
+
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>	
+    <script src="/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="/inputmask/jquery.inputmask.min.js"></script>
+    <script src="/public/js/script.js"></script>
+</body>
+</html>

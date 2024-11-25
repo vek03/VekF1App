@@ -1,0 +1,48 @@
+    <style>
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .button-container a {
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(90deg, #ff1e56, #f9c802);
+            padding: 15px 30px;
+            border-radius: 50px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-container a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .button-container a:active {
+            transform: scale(1.05);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        .red{
+            padding: 20px;
+            background-color: #900000
+        }
+    </style>
+
+  <div class="red">
+        <div class="button-container">
+            <a href="/grandPrix">Gran Prix</a>
+            <a href="/pilots">Pilotos</a>
+            <a href="/teams">Equipes</a>
+        </div>
+    </div>

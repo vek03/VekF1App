@@ -1,0 +1,194 @@
+<style>
+    /* Container geral */
+    .container {
+        background-color: #1e1e1e;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        color: #fff;
+    }
+
+    /* Estilo dos cards */
+    .race-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #333; /* Cor de fundo do card */
+        color: #fff; /* Cor do texto */
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        flex-wrap: wrap;
+    }
+
+    .race-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Nome da equipe à esquerda */
+    .race-card .info-box {
+        flex-grow: 1;
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-right: 20px;
+    }
+
+    /* Imagem à direita */
+    .race-card img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+
+    /* Botões de editar e excluir (quadrados arredondados e ícones pequenos) */
+    .race-card .button-group {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .button-group button {
+        width: 48%; /* 50% da largura do card, com um pequeno espaço */
+        height: 50px; /* Altura fixa para manter o formato quadrado arredondado */
+        padding: 10px;
+        border-radius: 10px; /* Botão arredondado */
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 0; /* Oculta o texto */
+        transition: background-color 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    /* Botão Editar */
+    .button-group button.edit {
+        background-color: #FFD700; /* Cor de fundo do botão editar */
+    }
+
+    .button-group button.edit:hover {
+        background-color: #e6be00;
+    }
+
+    /* Botão Excluir */
+    .button-group button.delete {
+        background-color: rgb(163, 12, 12); /* Cor de fundo do botão excluir */
+    }
+
+    .button-group button.delete:hover {
+        background-color: #d30606;
+    }
+
+    /* Tamanho dos ícones dentro dos botões */
+    .button-group button svg {
+        width: 24px;
+        height: 24px;
+        fill: white; /* Cor do ícone */
+    }
+
+    /* Responsividade para telas pequenas */
+    @media (max-width: 768px) {
+        .race-card {
+            flex-direction: column; /* Empilha os elementos verticalmente */
+            align-items: center;
+        }
+
+        .race-card .info-box {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .race-card img {
+            margin-top: 10px;
+        }
+
+        .button-group {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="container py-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="view-tab" data-bs-toggle="tab" data-bs-target="#view" type="button"
+                role="tab">Visualizar</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="create-tab" href="/teams/create">Cadastrar</a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-4" id="myTabContent">
+        <!-- Visualizar -->
+        <div class="tab-pane fade show active" id="view" role="tabpanel">
+            <h3>Equipes</h3>
+            <p>Aqui você pode visualizar os detalhes das equipes cadastradas.</p>
+
+            <!-- Cards das Equipes -->
+            {{#each teams}}
+                <div class="race-card">
+                    <!-- Nome da Equipe -->
+                    <div class="info-box">
+                        <h4>{{nome}}</h4>
+                        <div class="color-box-container" style="display: flex; gap: 5px;">
+                            <div class="color-box" style="width: 15px; height: 15px; background-color: {{corPrimaria}}"></div>
+                            <div class="color-box" style="width: 15px; height: 15px; background-color: {{corSecundaria}}"></div>
+                        </div>
+                    </div>
+
+                    <!-- Imagem da Equipe -->
+                    <img src="/public/img/marcas/{{imagem}}" alt="Logo da equipe">
+
+                    <!-- Botões de Editar e Excluir -->
+                    <div class="button-group">
+                        <button class="edit" onclick="window.location = '/teams/{{id}}/edit'">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2">
+                                <path d="M17 3l4 4-10 10H7v-4L17 3z"></path>
+                            </svg>
+                        </button>
+
+                        <button class="delete" onclick="deletarEquipe('{{id}}')">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
+                                <path d="M3 6h18"></path>
+                                <path d="M8 6v12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6"></path>
+                                <path d="M10 6V4a2 2 0 0 1 4 0v2"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+<script>
+    function deletarEquipe(key) {
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: "Você não poderá reverter isso!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sim, Excluir!',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`/teams/${key}/delete`, {
+                    method: 'DELETE'
+                }).then(() => {
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.error('Erro:', error);
+                });
+            }
+        });
+    }
+</script>

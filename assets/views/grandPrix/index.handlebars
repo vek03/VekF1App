@@ -1,0 +1,223 @@
+<style>
+    .container {
+        background-color: #1e1e1e;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        color: #fff;
+    }
+
+    .nav-tabs .nav-link.active {
+        background-color: #FFD700;
+        color: #000;
+        font-weight: bold;
+    }
+
+    .nav-tabs .nav-link {
+        color: #FFD700;
+    }
+
+    .btn-custom {
+        background-color: #FFD700;
+        color: #000;
+        border: none;
+    }
+
+    .btn-custom:hover {
+        background-color: #e6be00;
+    }
+
+    .form-control {
+        background-color: #1a1a1a;
+        color: #FFD700;
+        border: 1px solid #FFD700;
+    }
+
+    button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #FFD700;
+        color: #121212;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px;
+    }
+
+    button.salvar {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #FFD700;
+        color: #121212;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 5px;
+    }
+
+    button.salvar:hover {
+        background-color: #e7b614;
+    }
+
+    button.excluir {
+        background-color: rgb(163, 12, 12);
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        color: #ffffff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 5px;
+    }
+
+    button.excluir:hover {
+        background-color: #d30606;
+    }
+
+    /*CARDS*/
+
+    /* Adicionando ajustes no layout da button-group para garantir que os botões fiquem na mesma linha */
+.button-group {
+    display: flex; /* Flexbox para alinhar os itens */
+    gap: 10px; /* Espaço entre os botões */
+    justify-content: start; /* Alinha os botões à esquerda */
+}
+
+.button-group button {
+    width: 48%; /* A largura dos botões será de 48% para ocupar o espaço adequado */
+    height: 50px; /* Altura fixa para manter o formato do botão */
+    border-radius: 10px; /* Botão arredondado */
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px; /* Ajusta o tamanho da fonte */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+/* Botão Editar */
+.button-group button.edit {
+    background-color: #FFD700;
+}
+
+.button-group button.edit:hover {
+    background-color: #e6be00;
+}
+
+/* Botão Excluir */
+.button-group button.delete {
+    background-color: rgb(163, 12, 12);
+}
+
+.button-group button.delete:hover {
+    background-color: #d30606;
+}
+
+/* Tamanho dos ícones dentro dos botões */
+.button-group button svg {
+    width: 24px;
+    height: 24px;
+    fill: white; /* Cor do ícone */
+}
+
+    .race-card {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .race-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .race-card h4 {
+        font-size: 1.4rem;
+        margin-bottom: 5px;
+        color: #343a40;
+    }
+
+    .race-card p {
+        font-size: 1rem;
+        color: #6c757d;
+        margin: 2px 0;
+    }
+</style>
+
+<div class="container py-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="view-tab" data-bs-toggle="tab" data-bs-target="#view" type="button"
+                role="tab">Visualizar</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="create-tab" href="grandPrix/create">Cadastrar</a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-4" id="myTabContent">
+            <div class="tab-pane fade show active" id="view" role="tabpanel">
+                <h3>Corridas</h3>
+                <p>Aqui você pode visualizar os detalhes das corridas cadastradas.</p>
+
+                {{#each grandPrixs}}
+                    <div class="race-card">
+                        <h4>{{pais}} - {{cidade}}</h4>
+                        <p>Autódromo de {{pista}}</p>
+                        <p>{{formattedData_inicio}} - {{formattedData_fim}}</p>
+
+                        <!-- Botões de Editar e Excluir -->
+                        <div class="button-group">
+                            <button class="edit" onclick="window.location = '/grandPrix/{{id}}/edit'">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2">
+                                    <path d="M17 3l4 4-10 10H7v-4L17 3z"></path>
+                                </svg>
+                            </button>
+
+                            <button class="delete" onclick="deletarGP('{{id}}')">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
+                                    <path d="M3 6h18"></path>
+                                    <path d="M8 6v12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6"></path>
+                                    <path d="M10 6V4a2 2 0 0 1 4 0v2"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+    </div>
+</div>
+
+<script>
+    function deletarGP(key) {
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: "Você não poderá reverter isso!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sim, Excluir!',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`/grandPrix/${key}/delete`, {
+                    method: 'DELETE'
+                }).then(() => {
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.error('Erro:', error);
+                });
+            }
+        });
+    }
+</script>
